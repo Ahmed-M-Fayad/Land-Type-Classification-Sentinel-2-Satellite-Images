@@ -1,0 +1,87 @@
+{
+    "pipeline_bundle_path": "/content/drive/My Drive/DEPI/Data/pipelines/eurosat_pipeline_bundle.pkl",
+    "individual_pipelines": {
+        "full_processing": "/content/drive/My Drive/DEPI/Data/pipelines/full_processing_pipeline.pkl",
+        "preprocessing": "/content/drive/My Drive/DEPI/Data/pipelines/preprocessing_pipeline.pkl",
+        "model_data": "/content/drive/My Drive/DEPI/Data/pipelines/model_data_pipeline.pkl",
+        "image_processor": "/content/drive/My Drive/DEPI/Data/pipelines/satellite_image_processor.pkl",
+        "label_encoder": "/content/drive/My Drive/DEPI/Data/pipelines/label_encoder.pkl"
+    },
+    "usage_examples": {
+        "load_bundle": "with open('eurosat_pipeline_bundle.pkl', 'rb') as f: bundle = pickle.load(f)",
+        "execute_full_pipeline": "bundle['full_pipeline'].execute_full_pipeline()",
+        "preprocess_image": "bundle['preprocessing_pipeline'].preprocess_image(image_path)",
+        "load_model_data": "bundle['model_data_pipeline'].create_model_ready_datasets('RGB')"
+    },
+    "configurations_saved": {
+        "full_pipeline_config": {
+            "image_size": [
+                64,
+                64
+            ],
+            "bands": [
+                1,
+                2,
+                3,
+                7
+            ],
+            "expected_bands": 13,
+            "land_types": [
+                "Forest",
+                "River",
+                "Highway",
+                "AnnualCrop",
+                "SeaLake",
+                "HerbaceousVegetation",
+                "Industrial",
+                "Residential",
+                "PermanentCrop",
+                "Pasture"
+            ],
+            "data_types": [
+                "RGB",
+                "RGB_NIR",
+                "NDVI"
+            ],
+            "test_size": 0.2,
+            "val_size": 0.25,
+            "random_state": 42,
+            "augmentation_enabled": true,
+            "max_workers": 4
+        },
+        "model_pipeline_config": {
+            "splits_path": "/content/drive/My Drive/DEPI/Data/Processed_Data/splits",
+            "data_types_available": [
+                "RGB",
+                "RGB_NIR",
+                "NDVI"
+            ],
+            "categories": [
+                "Forest",
+                "River",
+                "Highway",
+                "AnnualCrop",
+                "SeaLake",
+                "HerbaceousVegetation",
+                "Industrial",
+                "Residential",
+                "PermanentCrop",
+                "Pasture"
+            ],
+            "image_size": [
+                64,
+                64
+            ]
+        }
+    },
+    "metadata": {
+        "created_at": "2025-05-21T19:24:52.082876",
+        "version": "1.0",
+        "description": "Complete EuroSAT satellite image processing pipeline bundle",
+        "components": [
+            "full_pipeline: Complete data download to splits pipeline",
+            "preprocessing_pipeline: Individual image preprocessing",
+            "model_data_pipeline: Model-ready dataset creation"
+        ]
+    }
+}
